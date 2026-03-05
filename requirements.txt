@@ -44,9 +44,7 @@ Initial release: `v1.0.0`
 
 ---
 
-## Author
 
-Advanced Software Engineering — Practical Assignment
 
 
 
