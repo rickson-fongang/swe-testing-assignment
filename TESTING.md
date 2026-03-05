@@ -1,83 +1,70 @@
-# Testing Strategy — Quick-Calc
+# Testing Strategy
 
-## 1. Overview
+This document describes the testing strategy used for the Quick-Calc application.
 
-The testing strategy for Quick-Calc follows a layered approach aligned with best practices in software engineering. The objective was to verify functional correctness of arithmetic logic while demonstrating understanding of structured testing principles discussed in Lecture 3.
+## What Was Tested
 
----
+The following components were tested:
 
-## 2. What Was Tested
+- Core calculator logic (addition, subtraction, multiplication, division)
+- Error handling for division by zero
+- Edge cases such as negative numbers, decimal numbers, and large numbers
+- Integration between user input and calculator operations
 
-### Unit Tests
-Unit tests target the `Calculator` class directly. Each arithmetic operation is tested independently in isolation.
+## What Was Not Tested
 
-Covered:
-- Addition
-- Subtraction
-- Multiplication
-- Division
-- Division by zero (exception handling)
-- Negative numbers
-- Decimal numbers
-- Large numbers
-
-### Integration Tests
-Integration tests verify interaction between the CLI/input layer (`cli.py`) and the underlying calculation logic (`calculator.py`).
-
-Covered:
-- Full calculation flow (e.g., 5 + 3 = 8)
-- Clear/reset functionality after calculation
+The project does not include performance testing, security testing, or graphical interface testing.  
+These were excluded because the application focuses only on arithmetic logic and testing methodology.
 
 ---
 
-## 3. What Was Not Tested
+## Testing Pyramid
 
-- Performance testing (not required for scope)
-- Security testing (no external input exposure)
-- Usability testing (CLI-based minimal interface)
-- Load testing (application complexity does not justify it)
+The project follows the **Testing Pyramid** principle:
 
-These were intentionally excluded to maintain scope alignment with assignment objectives.
+- **Unit Tests (8 tests)** verify individual calculation functions.
+- **Integration Tests (2 tests)** verify that components interact correctly.
 
----
-
-## 4. Testing Pyramid
-
-The test suite reflects the Testing Pyramid structure:
-
-- Majority: Unit Tests (fast, isolated, logic-level verification)
-- Few: Integration Tests (component interaction validation)
-- No end-to-end tests (not required for this scale)
-
-This structure ensures fast feedback cycles and high reliability at the logic layer.
+This reflects the pyramid structure where most tests exist at the unit level.
 
 ---
 
-## 5. Black-Box vs White-Box Testing
+## Black-box vs White-box Testing
 
-### Unit Tests — White-Box Approach
-Unit tests were written with full knowledge of the internal implementation of the Calculator class. Edge cases such as division by zero were explicitly tested.
+Unit tests mainly use **white-box testing** because they verify internal functions directly.
 
-### Integration Tests — Black-Box Approach
-Integration tests focus on behavior and output rather than internal structure. They simulate user-level interaction with the system.
+Integration tests follow **black-box testing**, simulating user interactions without inspecting internal implementation.
 
 ---
 
-## 6. Functional vs Non-Functional Testing
+## Functional vs Non-Functional Testing
 
-### Functional Testing
-All arithmetic correctness and error handling behavior were tested.
+The tests focus on **functional testing**, verifying that the calculator operations produce correct results.
 
-### Non-Functional Testing
-Not covered:
-- Performance benchmarks
-- Scalability
-- Reliability under stress
-
-These were outside the assignment scope.
+Non-functional aspects such as performance or scalability were not tested because they are outside the scope of this assignment.
 
 ---
 
-## 7. Regression Testing
+## Regression Testing
 
-The implemented test suite can be used as a regression safety net. Any future changes to the arithmetic logic or input layer can be validated by running:
+The test suite also acts as **regression testing**.  
+If a previously working feature fails, the test suite will immediately detect the regression before deployment or release.
+
+---
+
+## Test Results Summary
+
+| Test Name | Type | Status |
+|-----------|------|--------|
+| test_addition | Unit | Pass |
+| test_subtraction | Unit | Pass |
+| test_multiplication | Unit | Pass |
+| test_division | Unit | Pass |
+| test_division_by_zero | Unit | Pass |
+| test_negative_numbers | Unit | Pass |
+| test_decimal_numbers | Unit | Pass |
+| test_large_numbers | Unit | Pass |
+| test_full_addition_flow | Integration | Pass |
+| test_clear_after_operation | Integration | Pass |
+
+All tests pass successfully in version **v1.0.0**.
